@@ -6,6 +6,7 @@
 /documentation.md
 
 # Artefak Pengujian & Tooling
+/tests/
 /.playwright-mcp/
 /.codebase-memory/
 /.opencode/

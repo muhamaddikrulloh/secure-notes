@@ -39,8 +39,6 @@ SecureNotes/
 │   ├── app.php              # Koneksi PDO, sesi aman, CSRF, rate limit, helper UI
 │   ├── crypto.php           # PBKDF2-HMAC-SHA256 & AES-256-GCM (OpenSSL)
 │   └── notes_table.php      # Komponen tabel catatan
-├── tests/
-│   └── self_check.php       # Pengujian otomatis fungsi kriptografi AES-256-GCM
 ├── .htaccess                # Proteksi file konfigurasi & skema SQL
 ├── auth.php                 # Halaman input Kunci Rahasia
 ├── config.php               # Konfigurasi koneksi database MySQL & parameter KDF
@@ -71,13 +69,13 @@ SecureNotes/
    File `config.php` sudah dikonfigurasi langsung untuk pengaturan standar Laragon (`root` tanpa kata sandi) sehingga tidak memerlukan penyalinan file konfigurasi manual:
    ```php
    return [
-       'db_host' => getenv('DB_HOST') ?: '127.0.0.1',
-       'db_port' => (int) (getenv('DB_PORT') ?: 3306),
-       'db_name' => getenv('DB_NAME') ?: 'secure_notes',
-       'db_user' => getenv('DB_USER') ?: 'root',
-       'db_pass' => getenv('DB_PASS') ?: '',
-       'kdf_iterations' => (int) (getenv('KDF_ITERATIONS') ?: 600000),
-       'session_timeout' => 1800,
+      'db_host' => '127.0.0.1',
+      'db_port' => 3306,
+      'db_name' => 'secure_notes',
+      'db_user' => 'root',
+      'db_pass' => '',
+      'kdf_iterations' => 600000,
+      'session_timeout' => 1800,
    ];
    ```
 
@@ -118,13 +116,3 @@ Setiap kali halaman dashboard dirender:
 1. Jika sesi berada pada **Mode Terkunci**, fungsi `ui_text()` dan `fetch_all_notes()` langsung mengembalikan string `ciphertext` Base64 asli dari database tanpa membocorkan plaintext apa pun.
 2. Jika sesi berada pada **Mode Terbuka**, `openssl_decrypt` memverifikasi keutuhan data terhadap `nonce` dan `tag` autentikasi 16-byte.
 3. Apabila `ciphertext`, `nonce`, atau `tag` di database telah dimodifikasi (tampered), verifikasi GCM gagal (`false`), dan sistem menolak menampilkan teks korup.
-
----
-
-## Pengujian Kriptografi Mandiri (CLI)
-
-Untuk menjalankan pengujian mandiri fungsi derivasi kunci, keunikan nonce, dekripsi valid, penolakan kunci salah, dan deteksi modifikasi ciphertext/tag:
-
-```bash
-php tests/self_check.php
-```
