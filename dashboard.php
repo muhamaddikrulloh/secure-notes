@@ -128,7 +128,7 @@ $allNotes = fetch_all_notes('');
 $totalNotesCount = count($allNotes);
 $displayedNotes = ($searchQuery !== '') ? fetch_all_notes($searchQuery) : $allNotes;
 $recentNotes = array_slice($allNotes, 0, 5);
-$flash = get_flash();
+$flash = ($currentView === 'notes') ? get_flash() : null;
 ?>
 <!doctype html>
 <html lang="id">
@@ -292,18 +292,6 @@ $flash = get_flash();
                             </div>
                         </div>
 
-                        <!-- Notifikasi Flash Operasi CRUD -->
-                        <?php if ($flash !== null): ?>
-                            <div class="alert alert-<?= e($flash['type']) ?> alert-dismissible mb-4" role="alert" id="alert-flash">
-                                <div class="d-flex align-items-center gap-2">
-                                    <div>
-                                        <i class="ti <?= $flash['type'] === 'success' ? 'ti-check' : 'ti-alert-circle' ?> icon alert-icon" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="crypto-wrap"><?= e(ui_text((string) $flash['key'])) ?></div>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-
                         <?php if ($currentView === 'overview'): ?>
                             <!-- Panel Telemetri Kriptografi Terpadu -->
                             <section class="telemetry-panel mb-4" aria-label="<?= e(ui_text('section_crypto_status')) ?>">
@@ -459,6 +447,37 @@ $flash = get_flash();
             </main>
         </div>
     </div>
+
+    <?php if ($currentView === 'notes' && $flash !== null): ?>
+        <?php $isFlashSuccess = ($flash['type'] === 'success'); ?>
+        <div class="toast-container position-fixed top-0 end-0 p-3" id="toast-container-crud">
+            <div
+                id="toast-flash"
+                class="toast fade show sn-toast <?= $isFlashSuccess ? 'sn-toast-success' : 'sn-toast-danger' ?>"
+                role="<?= $isFlashSuccess ? 'status' : 'alert' ?>"
+                aria-live="<?= $isFlashSuccess ? 'polite' : 'assertive' ?>"
+                aria-atomic="true"
+                data-bs-autohide="true"
+                data-bs-delay="4000"
+            >
+                <div class="d-flex align-items-start gap-2 p-3">
+                    <span class="sn-toast-icon" aria-hidden="true">
+                        <i class="ti <?= $isFlashSuccess ? 'ti-circle-check' : 'ti-alert-circle' ?>"></i>
+                    </span>
+                    <div class="toast-body p-0 flex-fill crypto-wrap" id="toast-flash-message">
+                        <?= e(ui_text((string) $flash['key'])) ?>
+                    </div>
+                    <button
+                        type="button"
+                        class="btn-close ms-2 mt-1 flex-shrink-0"
+                        data-bs-dismiss="toast"
+                        aria-label="<?= e(ui_text('btn_close')) ?>"
+                        title="<?= e(ui_text('btn_close')) ?>"
+                    ></button>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
 
     <!-- Modal Detail Catatan -->
     <div class="modal modal-blur fade" id="modal-view-note" tabindex="-1" aria-hidden="true">
@@ -709,6 +728,6 @@ $flash = get_flash();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/js/tabler.min.js"></script>
-    <script src="assets/app.js"></script>
+    <script src="assets/app.js?v=<?= (int) @filemtime(__DIR__ . '/assets/app.js') ?>"></script>
 </body>
 </html>

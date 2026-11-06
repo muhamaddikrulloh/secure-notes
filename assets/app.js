@@ -74,4 +74,25 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    const toastElements = document.querySelectorAll('#toast-container-crud .toast');
+    toastElements.forEach(function (toastEl) {
+        if (window.bootstrap && typeof window.bootstrap.Toast === 'function') {
+            const toast = window.bootstrap.Toast.getOrCreateInstance(toastEl, {
+                autohide: true,
+                delay: 4000,
+            });
+            toast.show();
+        } else {
+            const closeBtn = toastEl.querySelector('[data-bs-dismiss="toast"]');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function () {
+                    toastEl.classList.remove('show');
+                });
+            }
+            window.setTimeout(function () {
+                toastEl.classList.remove('show');
+            }, 4000);
+        }
+    });
 });

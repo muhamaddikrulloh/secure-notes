@@ -196,6 +196,51 @@ h1, h2, h3, h4, h5, h6,
     margin-bottom: 0.2rem;
 }
 
+#toast-container-crud {
+    z-index: 1090;
+    width: min(25rem, 100%);
+    max-width: 100%;
+}
+
+.sn-toast {
+    width: 100%;
+    max-width: 100%;
+    border-radius: var(--sn-radius-md);
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: var(--sn-shadow-md);
+    background-color: var(--sn-surface);
+    color: var(--sn-text);
+}
+
+.sn-toast-success {
+    background-color: var(--sn-unlocked-bg);
+    border-color: var(--sn-unlocked-border);
+    color: var(--sn-unlocked-text);
+}
+
+.sn-toast-danger {
+    background-color: var(--sn-danger-bg);
+    border-color: var(--sn-danger-border);
+    color: var(--sn-danger-text);
+}
+
+.sn-toast-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    line-height: 1.35;
+    flex-shrink: 0;
+}
+
+.sn-toast .toast-body {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: inherit;
+}
+
 /* Buttons & Tactile States */
 .btn {
     font-weight: 600;
