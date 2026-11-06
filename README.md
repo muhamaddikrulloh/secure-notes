@@ -4,14 +4,28 @@ Aplikasi web manajemen catatan terenkripsi berbasis **PHP 8.3+ Native**, **MySQL
 
 ---
 
-## Identitas Mahasiswa (Tugas UTS)
+## Disusun Oleh
 
-| Keterangan | Data |
-| :--- | :--- |
-| **Nama** | **MUHAMAD DIKRULLOH** |
-| **NIM** | **2430511076** |
-| **Kelas** | **5B** |
-| **Mata Kuliah** | Keamanan Data dan Informasi |
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Nama</strong></td>
+      <td><strong>MUHAMAD DIKRULLOH</strong></td>
+    </tr>
+    <tr>
+      <td><strong>NIM</strong></td>
+      <td><strong>2430511076</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Kelas</strong></td>
+      <td><strong>5B</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Mata Kuliah</strong></td>
+      <td>Keamanan Data dan Informasi</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
