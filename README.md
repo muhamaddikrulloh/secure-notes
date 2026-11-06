@@ -43,9 +43,9 @@ SecureNotes/
 ├── auth.php                 # Halaman input Kunci Rahasia
 ├── config.php               # Konfigurasi koneksi database MySQL & parameter KDF
 ├── dashboard.php            # Dashboard utama & endpoint CRUD terotorisasi
-├── database.sql             # Skema tabel MySQL siap impor
 ├── index.php                # Halaman publik (Landing Page)
 ├── logout.php               # Penghapusan sesi & materi kunci di server
+├── secure_notes.sql         # Skema tabel MySQL siap impor
 └── setup.php                # Inisialisasi pertama kali (First-Time Setup)
 ```
 
@@ -60,9 +60,9 @@ SecureNotes/
    Buka **Laragon**, lalu klik **Start All** untuk menjalankan Apache/Nginx dan MySQL/MariaDB.
 
 3. **Impor Database MySQL**
-   Jalankan perintah berikut melalui Terminal Laragon atau impor file `database.sql` menggunakan HeidiSQL / phpMyAdmin:
+   Jalankan perintah berikut melalui Terminal Laragon atau impor file `secure_notes.sql` menggunakan HeidiSQL / phpMyAdmin:
    ```bash
-   mysql -u root < database.sql
+   mysql -u root < secure_notes.sql
    ```
 
 4. **Konfigurasi Koneksi Database (`config.php`)**

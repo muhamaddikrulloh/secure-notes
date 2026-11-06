@@ -1,5 +1,5 @@
 Options -Indexes
 
-<FilesMatch "^(config\.php|config\.example\.php|database\.sql)$">
+<FilesMatch "^(config\.php|secure_notes\.sql)$">
     Require all denied
 </FilesMatch>
