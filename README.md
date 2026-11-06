@@ -1,6 +1,17 @@
-# Sistem Manajemen Catatan
+# Sistem Manajemen Catatan (Secure Notes)
 
-Aplikasi web manajemen catatan konfidensial berbasis **PHP 8.3+ Native**, **MySQL (PDO)**, **Tabler UI**, dan kriptografi simetris **AES-256-GCM** dengan derivasi kunci **PBKDF2-HMAC-SHA256**.
+Aplikasi web manajemen catatan terenkripsi berbasis **PHP 8.3+ Native**, **MySQL (PDO)**, **Tabler UI**, dan kriptografi simetris **AES-256-GCM** dengan derivasi kunci **PBKDF2-HMAC-SHA256**.
+
+---
+
+## Identitas Mahasiswa (Tugas UTS)
+
+| Keterangan | Data |
+| :--- | :--- |
+| **Nama** | **MUHAMAD DIKRULLOH** |
+| **NIM** | **2430511076** |
+| **Kelas** | **5B** |
+| **Mata Kuliah** | Keamanan Data dan Informasi |
 
 ---
 
@@ -8,12 +19,12 @@ Aplikasi web manajemen catatan konfidensial berbasis **PHP 8.3+ Native**, **MySQ
 
 1. **Enkripsi Penuh Antarmuka & Data (AES-256-GCM)**
    - Seluruh teks statis dashboard (sidebar, navbar, judul halaman, label kartu, header tabel, tombol, placeholder, alert, hingga modal konfirmasi keluar) disimpan dalam bentuk terenkripsi di tabel `ui_texts`.
-   - Seluruh judul dan isi catatan rahasia dienkripsi menggunakan **AES-256-GCM** dengan **Nonce 12-byte (96-bit)** acak baru dan **Authentication Tag 16-byte (128-bit)** untuk setiap nilai.
+   - Seluruh judul dan isi catatan dienkripsi menggunakan **AES-256-GCM** dengan **Nonce 12-byte (96-bit)** acak baru dan **Authentication Tag 16-byte (128-bit)** untuk setiap nilai.
 2. **Dua Mode Dashboard Berdasarkan Verifikasi Kunci**
-   - **Mode Terbuka (Kunci Benar):** Seluruh teks antarmuka dan catatan didekripsi ke Bahasa Indonesia; operasi tambah, lihat, pencarian, ubah, dan hapus diaktifkan.
+   - **Mode Terbuka (Kunci Benar):** Seluruh teks antarmuka dan catatan didekripsi ke Bahasa Indonesia; operasi tambah, lihat detail, pencarian, ubah, dan hapus diaktifkan.
    - **Mode Terkunci (Kunci Salah):** Tetap membuka halaman dashboard dengan tata letak utuh namun seluruh teks antarmuka dan catatan ditampilkan sebagai **ciphertext Base64 asli** dari database. Seluruh operasi tulis (CRUD) dinonaktifkan di antarmuka dan ditolak (`HTTP 403`) di sisi server.
-3. **Tombol Logout Ikon & Modal Konfirmasi Terenkripsi**
-   - Tombol keluar di bagian bawah sidebar hanya menggunakan ikon tanpa teks pendamping agar selalu dikenali di kedua mode, serta membuka modal konfirmasi yang teksnya turut mengikuti status enkripsi/dekripsi.
+3. **Deteksi Manipulasi Data (Tamper Detection)**
+   - Apabila nilai `ciphertext`, `nonce`, atau `tag` di database diubah secara paksa melalui manajemen database, autentikasi GCM 128-bit akan mendeteksi kerusakan integritas, menampilkan peringatan manipulasi data, dan mengunci operasi edit pada baris tersebut.
 
 ---
 
@@ -22,18 +33,17 @@ Aplikasi web manajemen catatan konfidensial berbasis **PHP 8.3+ Native**, **MySQ
 ```text
 SecureNotes/
 ├── assets/
-│   ├── app.css              # CSS minimal untuk stabilitas tata letak ciphertext
+│   ├── app.css              # Desain sistem, tipografi IBM Plex, & tata letak ciphertext
 │   └── app.js               # Toggle kunci rahasia & pengisian data modal CRUD
 ├── includes/
 │   ├── app.php              # Koneksi PDO, sesi aman, CSRF, rate limit, helper UI
 │   ├── crypto.php           # PBKDF2-HMAC-SHA256 & AES-256-GCM (OpenSSL)
-│   └── notes_table.php      # Komponen tabel catatan rahasia
+│   └── notes_table.php      # Komponen tabel catatan
 ├── tests/
 │   └── self_check.php       # Pengujian otomatis fungsi kriptografi AES-256-GCM
 ├── .htaccess                # Proteksi file konfigurasi & skema SQL
 ├── auth.php                 # Halaman input Kunci Rahasia
-├── config.example.php       # Contoh konfigurasi database & KDF
-├── config.php               # Konfigurasi aktif aplikasi
+├── config.php               # Konfigurasi koneksi database MySQL & parameter KDF
 ├── dashboard.php            # Dashboard utama & endpoint CRUD terotorisasi
 ├── database.sql             # Skema tabel MySQL siap impor
 ├── index.php                # Halaman publik (Landing Page)
@@ -43,10 +53,10 @@ SecureNotes/
 
 ---
 
-## Panduan Instalasi di Laragon
+## Panduan Instalasi & Penggunaan (Laragon)
 
-1. **Salin Folder Proyek**
-   Letakkan folder proyek di dalam direktori `C:\laragon\www\SecureNotes` (atau jalankan langsung dari direktori proyek menggunakan PHP Server / Virtual Host Laragon).
+1. **Salin atau Clone Proyek**
+   Letakkan folder proyek di dalam direktori `C:\laragon\www\SecureNotes`.
 
 2. **Jalankan Layanan Laragon**
    Buka **Laragon**, lalu klik **Start All** untuk menjalankan Apache/Nginx dan MySQL/MariaDB.
@@ -57,16 +67,16 @@ SecureNotes/
    mysql -u root < database.sql
    ```
 
-4. **Konfigurasi Koneksi Database**
-   Salin `config.example.php` menjadi `config.php` (sudah tersedia secara bawaan untuk kredensial standar Laragon `root` tanpa kata sandi):
+4. **Konfigurasi Koneksi Database (`config.php`)**
+   File `config.php` sudah dikonfigurasi langsung untuk pengaturan standar Laragon (`root` tanpa kata sandi) sehingga tidak memerlukan penyalinan file konfigurasi manual:
    ```php
    return [
-       'db_host' => '127.0.0.1',
-       'db_port' => 3306,
-       'db_name' => 'secure_notes',
-       'db_user' => 'root',
-       'db_pass' => '',
-       'kdf_iterations' => 600000,
+       'db_host' => getenv('DB_HOST') ?: '127.0.0.1',
+       'db_port' => (int) (getenv('DB_PORT') ?: 3306),
+       'db_name' => getenv('DB_NAME') ?: 'secure_notes',
+       'db_user' => getenv('DB_USER') ?: 'root',
+       'db_pass' => getenv('DB_PASS') ?: '',
+       'kdf_iterations' => (int) (getenv('KDF_ITERATIONS') ?: 600000),
        'session_timeout' => 1800,
    ];
    ```
