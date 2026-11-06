@@ -1,0 +1,23 @@
+# Konfigurasi Lokal & Kredensial
+/config.php
+.env
+.env.*
+
+# Dokumentasi Internal / Catatan Pribadi
+/documentation.md
+
+# Artefak Pengujian & Tooling
+/.playwright-mcp/
+/.codebase-memory/
+/.opencode/
+audit-*.png
+verify-*.png
+
+# Dependensi & Sistem Operasi
+/vendor/
+/.idea/
+/.vscode/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
