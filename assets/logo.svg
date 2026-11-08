@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <filter id="logo-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#1d4ed8" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <rect x="10" y="10" width="100" height="100" rx="26" fill="#1d4ed8" filter="url(#logo-shadow)"/>
+  <g transform="translate(24, 24) scale(3)" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3"/>
+    <circle cx="12" cy="11" r="1.1" fill="#ffffff" stroke="none"/>
+    <path d="M12 12v2.6"/>
+  </g>
+</svg>

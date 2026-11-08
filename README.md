@@ -1,6 +1,26 @@
-# SecureNotes
+<p align="center">
+  <img src="assets/logo.svg" alt="SecureNotes Logo" width="108" height="108">
+</p>
 
-Aplikasi manajemen catatan terenkripsi berbasis **PHP 8.3+ Native**, **MySQL (PDO)**, **Tabler UI**, dan **AES-256-GCM** dengan derivasi kunci **PBKDF2-HMAC-SHA256**.
+<h1 align="center">SecureNotes</h1>
+
+<p align="center">
+  Aplikasi manajemen catatan terenkripsi berbasis AES-256-GCM & PBKDF2-HMAC-SHA256.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/platform-Web-2ea44f?style=flat" alt="Platform Web">
+  <img src="https://img.shields.io/badge/language-PHP_8.3%2B-777BB4?style=flat&logo=php&logoColor=white" alt="PHP 8.3+">
+  <img src="https://img.shields.io/badge/database-MySQL-00758F?style=flat&logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/cipher-AES--256--GCM-0284c7?style=flat" alt="AES-256-GCM">
+  <img src="https://img.shields.io/badge/kdf-PBKDF2--SHA256-6366f1?style=flat" alt="PBKDF2">
+  <img src="https://img.shields.io/badge/ui-Tabler-206bc4?style=flat" alt="Tabler UI">
+  <img src="https://img.shields.io/badge/license-MIT-a855f7?style=flat" alt="License MIT">
+</p>
+
+<p align="center">
+  SecureNotes adalah aplikasi brankas catatan terenkripsi yang menerapkan verifikasi integritas data bawaan (authenticated encryption) untuk melindungi kerahasiaan catatan serta mendeteksi setiap modifikasi data di tingkat basis data.
+</p>
 
 ---
 
@@ -46,6 +66,7 @@ SecureNotes/
 ├── assets/
 │   ├── app.css              # Desain sistem & tata letak antarmuka
 │   ├── app.js               # Handler modal CRUD & toggle keamanan
+│   ├── logo.svg             # Logo visual identitas aplikasi
 │   └── screenshots/         # Dokumentasi tangkapan layar antarmuka
 ├── includes/
 │   ├── app.php              # Helper sesi aman, CSRF, proteksi UI, & DB
