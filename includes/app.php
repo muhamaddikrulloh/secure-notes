@@ -303,12 +303,14 @@ function get_initial_ui_catalog(): array
         'th_updated' => 'Diperbarui',
         'th_actions' => 'Aksi',
         'cell_time_locked' => 'Waktu Terenkripsi (AES-GCM)',
-        'cell_tampered' => 'PERINGATAN: Tag Autentikasi GCM Tidak Valid (Data Dimodifikasi)',
+        'cell_tampered' => 'Data Dimodifikasi',
 
         // Formulir & Modal CRUD
         'modal_add_title' => 'Tambah Catatan',
         'modal_edit_title' => 'Edit Catatan',
         'modal_view_title' => 'Detail Catatan',
+        'modal_tampered_title' => 'Peringatan Integritas Data',
+        'modal_tampered_desc' => 'Tag autentikasi AES-256-GCM tidak valid. Data ini telah dimodifikasi atau rusak di database sehingga hanya ciphertext yang ditampilkan.',
         'form_title_label' => 'Judul Catatan',
         'form_title_placeholder' => 'Masukkan judul catatan...',
         'form_content_label' => 'Isi Catatan',
@@ -472,7 +474,8 @@ function load_encrypted_ui_catalog(): array
                 if ($needsUpdate) {
                     if ($stmtUpsert === null) {
                         $stmtUpsert = $pdo->prepare(
-                            'UPDATE ui_texts SET ciphertext = :ciphertext, nonce = :nonce, tag = :tag WHERE text_key = :text_key'
+                            'INSERT INTO ui_texts (text_key, ciphertext, nonce, tag) VALUES (:text_key, :ciphertext, :nonce, :tag)
+                             ON DUPLICATE KEY UPDATE ciphertext = VALUES(ciphertext), nonce = VALUES(nonce), tag = VALUES(tag)'
                         );
                     }
                     $enc = encrypt_data($plaintext, $rawKey);
@@ -506,7 +509,8 @@ function ui_text(string $key): string
 
     $catalog = load_encrypted_ui_catalog();
     if (!isset($catalog[$key])) {
-        return '';
+        $initial = get_initial_ui_catalog();
+        return $resolved[$key] = $initial[$key] ?? '';
     }
 
     $entry = $catalog[$key];

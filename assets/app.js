@@ -26,6 +26,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const titleEl = document.getElementById('view-note-title');
             const contentEl = document.getElementById('view-note-content');
             const updatedEl = document.getElementById('view-note-updated');
+            const tamperedAlertEl = document.getElementById('view-note-tampered-alert');
+            const tamperedStatusEl = document.getElementById('view-note-tampered-status');
+            const iconEl = document.getElementById('view-note-icon');
+            const isTampered = button.getAttribute('data-note-tampered') === '1';
 
             if (titleEl) {
                 titleEl.textContent = button.getAttribute('data-note-title') || '';
@@ -35,6 +39,17 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             if (updatedEl) {
                 updatedEl.textContent = button.getAttribute('data-note-updated') || '';
+            }
+            if (tamperedAlertEl) {
+                tamperedAlertEl.classList.toggle('d-none', !isTampered);
+            }
+            if (tamperedStatusEl) {
+                tamperedStatusEl.classList.toggle('d-none', !isTampered);
+            }
+            if (iconEl) {
+                iconEl.className = isTampered
+                    ? 'ti ti-alert-triangle me-2 text-danger'
+                    : 'ti ti-file-text me-2 text-primary';
             }
         });
     });

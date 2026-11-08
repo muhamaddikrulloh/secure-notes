@@ -483,13 +483,29 @@ $flash = ($currentView === 'notes') ? get_flash() : null;
     <div class="modal modal-blur fade" id="modal-view-note" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+                <div class="modal-status bg-danger d-none" id="view-note-tampered-status"></div>
                 <div class="modal-header">
                     <h5 class="modal-title crypto-truncate">
-                        <i class="ti ti-file-text me-2 text-primary" aria-hidden="true"></i>
+                        <i class="ti ti-file-text me-2 text-primary" id="view-note-icon" aria-hidden="true"></i>
                         <span><?= e(ui_text('modal_view_title')) ?></span>
                     </h5>
                 </div>
                 <div class="modal-body">
+                    <div class="alert alert-danger mb-3 d-none" id="view-note-tampered-alert" role="alert">
+                        <div class="d-flex align-items-start gap-2">
+                            <div>
+                                <i class="ti ti-alert-triangle icon alert-icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <h4 class="alert-title crypto-truncate">
+                                    <?= e(ui_text('modal_tampered_title')) ?>
+                                </h4>
+                                <div class="text-secondary small crypto-wrap">
+                                    <?= e(ui_text('modal_tampered_desc')) ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <div class="form-label text-secondary small crypto-truncate"><?= e(ui_text('form_title_label')) ?></div>
                         <div class="fw-bold fs-3 crypto-wrap" id="view-note-title"></div>

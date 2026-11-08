@@ -49,11 +49,6 @@ $tableRows = isset($tableRows) && is_array($tableRows) ? $tableRows : [];
                                     <i class="ti <?= $isTampered ? 'ti-alert-triangle text-danger' : ($unlocked ? 'ti-file-text' : 'ti-lock') ?>"></i>
                                 </span>
                                 <div class="overflow-hidden w-100">
-                                    <?php if ($isTampered): ?>
-                                        <span class="badge bg-red-lt d-block mb-1 crypto-truncate note-tampered-badge">
-                                            <?= e(ui_text('cell_tampered')) ?>
-                                        </span>
-                                    <?php endif; ?>
                                     <div class="fw-semibold crypto-cell-title" title="<?= e($displayTitle) ?>">
                                         <?= e($displayTitle) ?>
                                     </div>
@@ -85,6 +80,7 @@ $tableRows = isset($tableRows) && is_array($tableRows) ? $tableRows : [];
                                     data-note-title="<?= e($displayTitle) ?>"
                                     data-note-content="<?= e($displayContent) ?>"
                                     data-note-updated="<?= e((string) $note['updated_at']) ?>"
+                                    data-note-tampered="<?= $isTampered ? '1' : '0' ?>"
                                     title="<?= e(ui_text('tooltip_view')) ?>"
                                 >
                                     <i class="ti ti-eye" aria-hidden="true"></i>
