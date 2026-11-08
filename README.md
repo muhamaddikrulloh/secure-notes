@@ -51,8 +51,6 @@ SecureNotes/
 │   ├── app.php              # Helper sesi aman, CSRF, proteksi UI, & DB
 │   ├── crypto.php           # Implementasi PBKDF2 & AES-256-GCM
 │   └── notes_table.php      # Komponen tabel catatan
-├── tests/
-│   └── self_check.php       # Pengujian mandiri integritas kriptografi
 ├── .htaccess                # Proteksi akses file konfigurasi
 ├── auth.php                 # Halaman input Kunci Rahasia
 ├── config.php               # Konfigurasi koneksi database & KDF
