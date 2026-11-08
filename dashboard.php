@@ -136,7 +136,7 @@ $flash = ($currentView === 'notes') ? get_flash() : null;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title><?= e(ui_text('app_name')) ?></title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231d4ed8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3'/%3E%3Cpath d='M12 11m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0'/%3E%3Cpath d='M12 12l0 2.5'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta20/dist/css/tabler.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <link rel="stylesheet" href="assets/app.css?v=<?= (int) @filemtime(__DIR__ . '/assets/app.css') ?>">
@@ -160,9 +160,7 @@ $flash = ($currentView === 'notes') ? get_flash() : null;
 
                 <h1 class="navbar-brand justify-content-start w-100">
                     <a href="dashboard.php?view=overview" class="d-flex align-items-center gap-2 text-decoration-none w-100">
-                        <span class="brand-mark" aria-hidden="true">
-                            <i class="ti ti-shield-lock"></i>
-                        </span>
+                        <img src="assets/logo.svg" alt="Secure Notes" class="brand-logo" width="34" height="34">
                         <span class="crypto-truncate brand-title fw-bold" title="<?= e(ui_text('app_name')) ?>">
                             <?= e(ui_text('app_name')) ?>
                         </span>
