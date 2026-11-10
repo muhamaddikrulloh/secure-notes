@@ -238,105 +238,106 @@ function get_session_key(): ?string
     return $raw;
 }
 
-// Katalog teks awal hanya dipakai saat setup pertama kali untuk dienkripsi ke tabel ui_texts
+// Katalog teks awal dipakai saat setup pertama kali dan disinkronkan ke tabel ui_texts
 function get_initial_ui_catalog(): array
 {
     return [
         // Identitas Aplikasi & Navigasi
         'app_name' => 'Secure Notes',
-        'app_subtitle' => 'Brankas Kriptografi AES-256-GCM',
+        'app_subtitle' => 'Sistem Informasi Manajemen Catatan',
         'nav_overview' => 'Dashboard',
         'nav_notes' => 'Catatan',
-        'nav_security_badge' => 'AES-256-GCM Aktif',
-        'nav_mode_unlocked' => 'Kunci Terverifikasi',
-        'nav_mode_locked' => 'Mode Terkunci: Pratinjau Ciphertext',
+        'nav_security_badge' => 'Penyimpanan Terlindungi',
+        'nav_mode_unlocked' => 'Akses Penuh',
+        'nav_mode_locked' => 'Mode Terkunci',
         'sr_logout' => 'Keluar dari Sesi',
-        'tooltip_logout' => 'Keluar Sesi',
+        'tooltip_logout' => 'Keluar dari Sistem',
 
         // Judul Halaman & Seksi
-        'page_pretitle_overview' => 'Panel Kriptografi Simetris',
-        'page_title_overview' => 'Ringkasan Keamanan & Catatan',
-        'page_pretitle_notes' => 'Penyimpanan Terenkripsi AES-256-GCM',
+        'page_pretitle_overview' => 'Ringkasan Sistem',
+        'page_title_overview' => 'Dashboard',
+        'page_pretitle_notes' => 'Kelola Data Catatan',
         'page_title_notes' => 'Manajemen Catatan',
         'section_recent_notes' => 'Catatan Terbaru',
         'section_all_notes' => 'Daftar Catatan',
-        'section_crypto_status' => 'Parameter & Status Kriptografi',
+        'section_crypto_status' => 'Aksi Cepat',
 
-        // Kartu Statistik Dashboard
+        // Kartu Ringkasan Dashboard
         'stat_notes_label' => 'Total Catatan',
-        'stat_notes_sub' => 'Terenkripsi di Database MySQL',
-        'stat_count_suffix' => 'Catatan Tersimpan',
-        'stat_cipher_label' => 'Algoritma & Mode Cipher',
-        'stat_cipher_val' => 'AES-256-GCM (Tag 128-bit)',
-        'stat_kdf_label' => 'Derivasi Kunci (KDF)',
-        'stat_kdf_val' => 'PBKDF2-HMAC-SHA256',
-        'stat_status_label' => 'Status Otentikasi Kunci',
-        'stat_status_unlocked' => 'Kunci Valid (Dekripsi Aktif)',
-        'stat_status_locked' => 'Kunci Ditolak (Hanya Ciphertext)',
+        'stat_notes_sub' => 'Seluruh catatan yang tersimpan di sistem',
+        'stat_count_suffix' => 'Catatan',
+        'stat_cipher_label' => 'Pembaruan Terakhir',
+        'stat_cipher_val' => 'Belum ada aktivitas',
+        'stat_kdf_label' => 'Pencarian Cepat',
+        'stat_kdf_val' => 'Cari catatan berdasarkan judul atau isi',
+        'stat_status_label' => 'Status Akses',
+        'stat_status_unlocked' => 'Aktif & Siap Dikelola',
+        'stat_status_locked' => 'Terkunci (Hanya Baca)',
 
         // Pencarian
         'search_label' => 'Cari Catatan',
-        'search_placeholder' => 'Ketik kata kunci judul atau isi catatan...',
+        'search_placeholder' => 'Cari judul atau isi catatan...',
         'search_btn' => 'Cari',
         'search_reset' => 'Reset',
-        'search_info' => 'Menampilkan hasil pencarian untuk kata kunci:',
+        'search_info' => 'Menampilkan hasil pencarian untuk:',
 
         // Tombol & Tooltip
         'btn_add_note' => 'Tambah Catatan',
-        'btn_view_all' => 'Kelola Semua Catatan',
+        'btn_view_all' => 'Lihat Semua Catatan',
         'btn_view' => 'Detail',
         'btn_edit' => 'Edit',
         'btn_delete' => 'Hapus',
-        'btn_save' => 'Simpan',
+        'btn_save' => 'Simpan Catatan',
         'btn_update' => 'Simpan Perubahan',
         'btn_cancel' => 'Batal',
         'btn_close' => 'Tutup',
         'tooltip_view' => 'Lihat detail catatan',
         'tooltip_edit' => 'Edit catatan',
         'tooltip_delete' => 'Hapus catatan',
-        'tooltip_locked_action' => 'Dinonaktifkan pada Mode Terkunci',
+        'tooltip_locked_action' => 'Tidak tersedia pada Mode Terkunci',
 
         // Tabel Catatan
+        'th_no' => 'No',
         'th_title' => 'Judul Catatan',
         'th_content' => 'Ringkasan Isi',
-        'th_created' => 'Waktu Dibuat',
+        'th_created' => 'Dibuat',
         'th_updated' => 'Diperbarui',
         'th_actions' => 'Aksi',
-        'cell_time_locked' => 'Waktu Terenkripsi (AES-GCM)',
-        'cell_tampered' => 'Data Dimodifikasi',
+        'cell_time_locked' => 'Terkunci',
+        'cell_tampered' => 'Data Tidak Valid',
 
         // Formulir & Modal CRUD
-        'modal_add_title' => 'Tambah Catatan',
+        'modal_add_title' => 'Tambah Catatan Baru',
         'modal_edit_title' => 'Edit Catatan',
         'modal_view_title' => 'Detail Catatan',
-        'modal_tampered_title' => 'Peringatan Integritas Data',
-        'modal_tampered_desc' => 'Tag autentikasi AES-256-GCM tidak valid. Data ini telah dimodifikasi atau rusak di database sehingga hanya ciphertext yang ditampilkan.',
+        'modal_tampered_title' => 'Peringatan Keutuhan Data',
+        'modal_tampered_desc' => 'Catatan ini tidak dapat ditampilkan karena data tidak valid atau telah berubah di luar sistem.',
         'form_title_label' => 'Judul Catatan',
         'form_title_placeholder' => 'Masukkan judul catatan...',
         'form_content_label' => 'Isi Catatan',
-        'form_content_placeholder' => 'Masukkan isi catatan yang akan dienkripsi...',
-        'form_crypto_hint' => 'Data dienkripsi menggunakan AES-256-GCM dengan Nonce 12-byte acak baru sebelum disimpan ke MySQL.',
-        'modal_delete_title' => 'Konfirmasi Hapus Catatan',
-        'modal_delete_desc' => 'Apakah Anda yakin ingin menghapus catatan ini secara permanen dari database?',
+        'form_content_placeholder' => 'Tulis isi catatan secara lengkap di sini...',
+        'form_crypto_hint' => 'Pastikan judul dan isi catatan sudah lengkap sebelum disimpan.',
+        'modal_delete_title' => 'Hapus Catatan',
+        'modal_delete_desc' => 'Apakah Anda yakin ingin menghapus catatan ini secara permanen?',
 
         // Modal Konfirmasi Keluar (Logout)
         'modal_logout_title' => 'Konfirmasi Keluar',
-        'modal_logout_desc' => 'Apakah Anda yakin ingin keluar?',
+        'modal_logout_desc' => 'Apakah Anda yakin ingin keluar dari sesi ini?',
         'btn_confirm_logout' => 'Keluar',
 
         // Empty State & Alert
-        'empty_notes_title' => 'Tidak Ada Catatan',
-        'empty_notes_desc' => 'Belum ada catatan yang tersimpan atau cocok dengan pencarian Anda.',
-        'alert_unlocked_title' => 'Dekripsi Terautentikasi Berhasil',
-        'alert_unlocked_desc' => 'Kunci Rahasia terverifikasi melalui tag autentikasi AES-256-GCM. Seluruh teks antarmuka dan catatan telah didekripsi.',
-        'alert_locked_title' => 'Mode Terkunci: Hanya Pratinjau Ciphertext',
-        'alert_locked_desc' => 'Kunci Rahasia tidak cocok dengan tag autentikasi AES-256-GCM. Seluruh label antarmuka dan catatan ditampilkan sebagai ciphertext Base64 asli dari database dan operasi tulis dinonaktifkan.',
-        'flash_created' => 'Catatan baru berhasil dienkripsi dan disimpan.',
-        'flash_updated' => 'Catatan berhasil diperbarui dan dienkripsi ulang dengan Nonce baru.',
-        'flash_deleted' => 'Catatan berhasil dihapus secara permanen.',
-        'flash_err_locked' => 'Akses ditolak: Operasi perubahan data tidak diizinkan dalam Mode Terkunci.',
+        'empty_notes_title' => 'Belum Ada Catatan',
+        'empty_notes_desc' => 'Belum ada catatan yang tersimpan atau sesuai dengan kata kunci pencarian Anda.',
+        'alert_unlocked_title' => 'Sesi Aktif',
+        'alert_unlocked_desc' => 'Anda memiliki akses penuh untuk membuat, mencari, mengedit, dan menghapus catatan.',
+        'alert_locked_title' => 'Mode Terkunci (Hanya Pratinjau)',
+        'alert_locked_desc' => 'Kunci akses yang dimasukkan tidak sesuai. Seluruh data ditampilkan dalam format terenkripsi (Base64) dan fitur pengelolaan catatan dinonaktifkan.',
+        'flash_created' => 'Catatan baru berhasil ditambahkan.',
+        'flash_updated' => 'Perubahan catatan berhasil disimpan.',
+        'flash_deleted' => 'Catatan berhasil dihapus.',
+        'flash_err_locked' => 'Akses ditolak: Perubahan data tidak diizinkan dalam Mode Terkunci.',
         'flash_err_validation' => 'Validasi gagal: Judul dan isi catatan tidak boleh kosong.',
-        'flash_err_csrf' => 'Permintaan ditolak: Token keamanan CSRF tidak valid.',
+        'flash_err_csrf' => 'Permintaan ditolak: Token keamanan sesi tidak valid.',
         'flash_err_notfound' => 'Catatan tidak ditemukan.',
     ];
 }
@@ -345,16 +346,16 @@ function get_initial_sample_notes(): array
 {
     return [
         [
-            'title' => 'Protokol Cadangan Kunci Server Produksi',
-            'content' => 'Kunci cadangan HSM disimpan pada brankas fisik Ruang Server Lantai 3 dengan skema pembagian rahasia Shamir (3-dari-5 pemegang otoritas). Evaluasi integritas dilakukan setiap awal semester.',
+            'title' => 'Notulensi Rapat Koordinasi Tim Produk',
+            'content' => 'Agenda evaluasi target kuartal berjalan telah disepakati bersama seluruh anggota tim. Pembaruan jadwal rilis modul dokumentasi internal akan ditinjau kembali pada pertemuan pekan depan.',
         ],
         [
-            'title' => 'Konfigurasi Kredensial Database Internal',
-            'content' => 'Seluruh koneksi antar-layanan wajib menggunakan TLS 1.3 dan akun dengan hak akses minimum (least privilege). Rotasi kredensial basis data dijadwalkan setiap 90 hari.',
+            'title' => 'Daftar Inventaris & Akun Layanan Operasional',
+            'content' => 'Pencatatan berkala untuk pembaruan lisensi perangkat lunak kerja, jadwal pemeliharaan server internal, serta daftar penanggung jawab operasional pada masing-masing divisi.',
         ],
         [
-            'title' => 'Catatan Audit Keamanan Data & Informasi',
-            'content' => 'Verifikasi implementasi AES-256-GCM memastikan setiap record memiliki Nonce 96-bit unik dan Authentication Tag 128-bit untuk menjamin kerahasiaan sekaligus keutuhan data.',
+            'title' => 'Rencana Pengembangan Sistem Informasi Internal',
+            'content' => 'Fokus perbaikan meliputi penyederhanaan antarmuka pengguna, peningkatan kecepatan pencarian dokumen, serta standarisasi format pencatatan laporan harian.',
         ],
     ];
 }
@@ -510,7 +511,16 @@ function ui_text(string $key): string
     $catalog = load_encrypted_ui_catalog();
     if (!isset($catalog[$key])) {
         $initial = get_initial_ui_catalog();
-        return $resolved[$key] = $initial[$key] ?? '';
+        $fallback = $initial[$key] ?? '';
+        if (is_unlocked()) {
+            return $resolved[$key] = $fallback;
+        }
+        if (!empty($catalog)) {
+            $entries = array_values($catalog);
+            $index = abs(crc32($key)) % count($entries);
+            return $resolved[$key] = (string) ($entries[$index]['ciphertext'] ?? '');
+        }
+        return $resolved[$key] = base64_encode($fallback);
     }
 
     $entry = $catalog[$key];
